@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harmonie Home Zen — Marie Christine Soreira · Ménage & Conciergerie Valras-Plage</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sage: #8FAF8C;
+  --sage-light: #BDD4BA;
+  --sage-dark: #5C7A59;
+  --sand: #F0E8D8;
+  --sand-deep: #DDD0B8;
+  --sand-darker: #C9B99A;
+  --white: #FDFAF6;
+  --dark: #2C3528;
+  --text: #3D4438;
+  --muted: #7A8070;
+  --rose: #D4A89A;
+  --rose-light: #EDD5CE;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 18px 5vw;
+  display: flex; justify-content: space-between; align-items: center;
+  transition: background .4s, box-shadow .4s;
+}
+nav.scrolled { background: rgba(253,250,246,.96); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(143,175,140,.2); }
+.nav-brand { display: flex; flex-direction: column; }
+.nav-brand-script { font-family: 'Dancing Script', cursive; font-size: 22px; color: var(--sage-dark); line-height: 1; }
+.nav-brand-sub { font-size: 9px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: var(--sage-dark); }
+.nav-cta { font-size: 13px; font-weight: 500; color: var(--white); background: var(--sage-dark); padding: 10px 22px; text-decoration: none; border-radius: 2px; transition: background .2s; }
+.nav-cta:hover { background: var(--dark); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  background: var(--sand);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 420px; height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(143,175,140,.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 20%;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,168,154,.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 6vw 80px 6vw;
+  position: relative; z-index: 1;
+}
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 11px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--sage-dark);
+  margin-bottom: 28px;
+  opacity: 0; animation: fadeUp .6s .1s forwards;
+}
+.hero-eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--sage); }
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(44px, 6vw, 80px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -.01em;
+  color: var(--dark);
+  opacity: 0; animation: fadeUp .7s .2s forwards;
+}
+.hero-title em { font-style: italic; color: var(--sage-dark); }
+.hero-title .script { font-family: 'Dancing Script', cursive; font-size: 1.1em; color: var(--sage-dark); display: block; }
+
+.hero-desc {
+  font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--muted);
+  margin-top: 28px; max-width: 400px;
+  opacity: 0; animation: fadeUp .7s .35s forwards;
+}
+
+.hero-badges {
+  display: flex; gap: 10px; margin-top: 36px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp .7s .45s forwards;
+}
+.hero-badge-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--white); border: 1px solid var(--sage-light);
+  padding: 8px 16px; border-radius: 40px;
+  font-size: 12px; font-weight: 500; color: var(--sage-dark);
+}
+
+.hero-cta-row {
+  display: flex; gap: 14px; margin-top: 44px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp .7s .55s forwards;
+}
+.btn-sage { display: inline-flex; align-items: center; gap: 10px; background: var(--sage-dark); color: var(--white); font-size: 13px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; padding: 16px 30px; text-decoration: none; border-radius: 2px; transition: background .2s, transform .2s; }
+.btn-sage:hover { background: var(--dark); transform: translateY(-2px); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--sage-light); color: var(--sage-dark); font-size: 13px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; padding: 16px 28px; text-decoration: none; border-radius: 2px; transition: background .2s, border-color .2s; }
+.btn-ghost:hover { background: var(--sage-light); border-color: var(--sage); }
+
+/* Hero right — visual */
+.hero-right {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 120px 4vw 80px;
+}
+
+.hero-visual {
+  width: 100%; max-width: 460px; position: relative;
+}
+
+.hero-card-main {
+  background: var(--white);
+  border-radius: 4px;
+  padding: 48px 40px;
+  box-shadow: 0 20px 80px rgba(92,122,89,.12), 0 4px 20px rgba(92,122,89,.06);
+  position: relative;
+  overflow: hidden;
+  opacity: 0; animation: fadeIn .8s .4s forwards;
+}
+.hero-card-main::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--sage-light), var(--sage-dark), var(--rose));
+}
+
+.hcm-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--sage-light), var(--sage));
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px; font-weight: 600; color: var(--white);
+  margin-bottom: 20px;
+}
+.hcm-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--dark); }
+.hcm-title { font-size: 12px; font-weight: 400; color: var(--muted); margin-top: 4px; letter-spacing: .04em; }
+.hcm-location { display: flex; align-items: center; gap: 6px; margin-top: 10px; font-size: 12px; color: var(--sage-dark); }
+.hcm-sep { width: 100%; height: 1px; background: var(--sand); margin: 20px 0; }
+.hcm-stars { color: var(--sage-dark); font-size: 15px; letter-spacing: 3px; }
+.hcm-rating { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--dark); margin-top: 4px; }
+.hcm-rating span { font-size: 14px; font-weight: 400; color: var(--muted); }
+.hcm-tags { display: flex; gap: 6px; margin-top: 16px; flex-wrap: wrap; }
+.hcm-tag { font-size: 11px; background: var(--sand); color: var(--text); padding: 4px 12px; border-radius: 40px; }
+
+.hero-card-float {
+  position: absolute; bottom: -20px; right: -20px;
+  background: var(--sage-dark);
+  color: var(--white);
+  padding: 18px 22px;
+  border-radius: 4px;
+  min-width: 140px;
+  box-shadow: 0 10px 40px rgba(92,122,89,.3);
+  opacity: 0; animation: fadeIn .8s .7s forwards;
+}
+.hcf-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; line-height: 1; }
+.hcf-label { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; opacity: .7; margin-top: 4px; }
+
+/* ─── SECTION BASE ─── */
+section { padding: 100px 6vw; }
+.section-label { font-size: 10px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--sage); }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(30px, 4.5vw, 52px); font-weight: 300; line-height: 1.1; letter-spacing: -.01em; color: var(--dark); }
+.section-title em { font-style: italic; color: var(--sage-dark); }
+
+/* ─── SERVICES ─── */
+.services { background: var(--white); }
+.services-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+.services-intro { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.8; margin-top: 24px; }
+
+.services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 8px; }
+.service-card {
+  background: var(--sand);
+  padding: 36px 28px;
+  transition: background .3s, transform .3s;
+  cursor: default;
+  border-bottom: 2px solid transparent;
+}
+.service-card:hover { background: var(--dark); transform: translateY(-3px); border-bottom-color: var(--sage); }
+.service-card:hover .sc-name { color: var(--white); }
+.service-card:hover .sc-icon { filter: grayscale(0) brightness(1.5); }
+.sc-icon { font-size: 24px; margin-bottom: 16px; display: block; transition: filter .3s; }
+.sc-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--dark); line-height: 1.3; transition: color .3s; }
+.sc-desc { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+
+.concierge-highlight { grid-column: 1 / -1; margin-top: 40px; background: var(--sand); border-left: 3px solid var(--sage-dark); padding: 40px 44px; }
+.concierge-highlight-head { display: flex; align-items: center; gap: 18px; }
+.concierge-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 32px; }
+.concierge-item { display: flex; align-items: flex-start; gap: 12px; }
+.concierge-item-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.concierge-item-title { font-size: 14px; font-weight: 600; color: var(--dark); }
+.concierge-item-desc { font-size: 12px; font-weight: 300; color: var(--muted); margin-top: 4px; line-height: 1.6; }
+@media (max-width: 780px) { .concierge-grid { grid-template-columns: 1fr; } .concierge-highlight { padding: 32px 24px; } .concierge-highlight-head { flex-direction: column; align-items: flex-start; gap: 10px; } }
+
+/* ─── DISPONIBILITÉS ─── */
+.dispo { background: var(--dark); }
+.dispo .section-title { color: var(--white); }
+.dispo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 2px; margin-top: 56px; }
+.dispo-day {
+  padding: 28px 16px; text-align: center;
+  background: rgba(253,250,246,.04);
+  border: 1px solid rgba(143,175,140,.1);
+  transition: background .3s;
+}
+.dispo-day.open { background: rgba(143,175,140,.08); }
+.dispo-day.open:hover { background: rgba(143,175,140,.16); }
+.dispo-day-name { font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: rgba(253,250,246,.4); }
+.dispo-day.open .dispo-day-name { color: var(--sage-light); }
+.dispo-hours { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; color: rgba(253,250,246,.25); margin-top: 10px; line-height: 1.4; }
+.dispo-day.open .dispo-hours { color: rgba(253,250,246,.8); }
+.dispo-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(253,250,246,.15); margin: 10px auto 0; }
+.dispo-day.open .dispo-dot { background: var(--sage); }
+.dispo-day.special .dispo-dot { background: var(--rose); }
+.dispo-day.special .dispo-hours { color: rgba(212,168,154,.8); }
+
+/* ─── AVIS ─── */
+.avis { background: var(--white); }
+.avis-layout { display: grid; grid-template-columns: 280px 1fr; gap: 60px; margin-top: 60px; align-items: start; }
+.avis-summary {
+  background: var(--sand);
+  padding: 36px 28px;
+  position: sticky; top: 100px;
+}
+.avis-big { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300; color: var(--dark); line-height: 1; }
+.avis-stars-big { font-size: 18px; color: var(--sage-dark); letter-spacing: 3px; margin-top: 4px; }
+.avis-count { font-size: 12px; font-weight: 400; color: var(--muted); margin-top: 6px; }
+.avis-bar-row { display: flex; align-items: center; gap: 8px; margin-top: 24px; }
+.avis-bar-label { font-size: 11px; color: var(--muted); width: 12px; text-align: right; }
+.avis-bar-track { flex: 1; height: 4px; background: var(--sand-deep); border-radius: 2px; overflow: hidden; }
+.avis-bar-fill { height: 100%; background: var(--sage); border-radius: 2px; }
+.avis-bar-pct { font-size: 11px; color: var(--muted); width: 36px; }
+
+.avis-list { display: flex; flex-direction: column; gap: 2px; }
+.avis-card {
+  background: var(--sand);
+  padding: 32px 28px;
+  transition: background .25s;
+}
+.avis-card:hover { background: var(--sand-deep); }
+.avis-card-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
+.avis-author-row { display: flex; align-items: center; gap: 14px; }
+.avis-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--sage-light), var(--sage)); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--white); flex-shrink: 0; }
+.avis-name { font-size: 14px; font-weight: 500; color: var(--dark); }
+.avis-date { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.avis-stars { font-size: 12px; color: var(--sage-dark); letter-spacing: 2px; }
+.avis-service-tag { font-size: 10px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; background: var(--white); color: var(--sage-dark); padding: 4px 12px; border-radius: 40px; }
+.avis-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; font-style: italic; color: var(--text); line-height: 1.7; margin-top: 20px; }
+.avis-compliment { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; color: var(--sage-dark); background: rgba(143,175,140,.15); border: 1px solid rgba(143,175,140,.3); padding: 4px 12px; border-radius: 40px; margin-top: 14px; }
+
+/* ─── À PROPOS ─── */
+.about { background: var(--sage-dark); overflow: hidden; position: relative; }
+.about::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(253,250,246,.06) 0%, transparent 60%); pointer-events: none; }
+.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 1; }
+.about .section-label { color: var(--sage-light); }
+.about .section-label::before { background: var(--sage-light); }
+.about .section-title { color: var(--white); }
+.about-text { font-size: 15px; font-weight: 300; color: rgba(253,250,246,.7); line-height: 1.85; margin-top: 24px; }
+.about-text strong { color: var(--white); font-weight: 500; }
+.about-certif { margin-top: 32px; padding: 20px 24px; border: 1px solid rgba(253,250,246,.15); border-radius: 2px; display: flex; gap: 14px; align-items: flex-start; }
+.about-certif-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.about-certif-label { font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--sage-light); }
+.about-certif-val { font-size: 14px; color: rgba(253,250,246,.8); margin-top: 4px; }
+.about-infos { display: flex; flex-direction: column; gap: 2px; }
+.about-info-card { background: rgba(253,250,246,.06); padding: 24px 28px; display: flex; gap: 16px; align-items: center; transition: background .25s; }
+.about-info-card:hover { background: rgba(253,250,246,.1); }
+.about-info-icon { font-size: 20px; flex-shrink: 0; }
+.about-info-label { font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: rgba(253,250,246,.45); }
+.about-info-val { font-size: 14px; color: rgba(253,250,246,.85); margin-top: 4px; }
+
+/* ─── CONTACT ─── */
+.contact { background: var(--sand); }
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.form-submit { background: var(--sage-dark); color: var(--white); border: none; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; padding: 18px 36px; cursor: pointer; border-radius: 2px; transition: background .2s; }
+.form-submit:hover { background: var(--dark); }
+
+.booking-cta { margin-top: 40px; background: var(--white); padding: 44px 40px; border-radius: 2px; border-left: 3px solid var(--sage-dark); }
+.booking-cta-text { font-size: 15px; font-weight: 300; color: var(--text); line-height: 1.8; }
+.booking-cta-text + .booking-cta-text { margin-top: 16px; }
+.booking-cta-steps { display: flex; flex-direction: column; gap: 14px; margin: 32px 0; padding: 24px 0; border-top: 1px solid var(--sand-deep); border-bottom: 1px solid var(--sand-deep); }
+.booking-cta-step { display: flex; align-items: center; gap: 14px; font-size: 14px; font-weight: 500; color: var(--dark); }
+.booking-cta-num { display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--sage-light); color: var(--dark); font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 600; flex-shrink: 0; }
+.booking-cta .form-submit { width: 100%; }
+.contact-details { display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
+.contact-detail { padding: 22px 0; border-bottom: 1px solid var(--sand-deep); display: flex; gap: 16px; }
+.contact-detail:first-child { border-top: 1px solid var(--sand-deep); }
+.cd-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; color: var(--sage-dark); }
+.cd-label { font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+.cd-val { font-size: 14px; color: var(--text); margin-top: 4px; line-height: 1.55; }
+.cd-val a { color: var(--sage-dark); font-weight: 500; text-decoration: none; }
+
+/* ─── FOOTER ─── */
+footer { background: var(--dark); padding: 48px 6vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.footer-brand { font-family: 'Dancing Script', cursive; font-size: 26px; color: var(--sage-light); }
+.footer-copy { font-size: 11px; color: rgba(253,250,246,.3); }
+.footer-siret { font-size: 11px; color: rgba(253,250,246,.25); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .services-layout, .about-layout, .contact-layout, .avis-layout { grid-template-columns: 1fr; }
+  .avis-summary { position: static; }
+  .nav-links { display: none; }
+}
+</style>
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-brand">
+    <span class="nav-brand-script">Harmonie Home Zen</span>
+    <span class="nav-brand-sub">Ménage & Conciergerie</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#avis">Avis</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Demander un devis</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Valras-Plage · Hérault</div>
+    <h1 class="hero-title">
+      <span class="script">Harmonie</span>
+      <em>Home</em> Zen
+    </h1>
+    <p class="hero-desc">Marie Christine Soreira — auto-entrepreneuse en ménage & conciergerie depuis 8 ans. Particuliers, professionnels, locations saisonnières.</p>
+    <div class="hero-badges">
+      <span class="hero-badge-pill">✦ 5/5 sur Google</span>
+      <span class="hero-badge-pill">⏱ Réponse en 1h</span>
+      <span class="hero-badge-pill">🔒 SIRET vérifié</span>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#contact" class="btn-sage">Demander un devis</a>
+      <a href="#services" class="btn-ghost">Voir les services →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-card-main">
+        <div class="hcm-avatar">MC</div>
+        <div class="hcm-name">Marie Christine Soreira</div>
+        <div class="hcm-title">Auto-entrepreneuse · Ménage & Conciergerie</div>
+        <div class="hcm-location">📍 Valras-Plage, Hérault</div>
+        <div class="hcm-sep"></div>
+        <div class="hcm-stars">★★★★★</div>
+        <div class="hcm-rating">5,0 <span>/ 5 · 3 avis vérifiés</span></div>
+        <div class="hcm-tags">
+          <span class="hcm-tag">Ménage</span>
+          <span class="hcm-tag">Conciergerie</span>
+          <span class="hcm-tag">Repassage</span>
+          <span class="hcm-tag">Vitres</span>
+          <span class="hcm-tag">Saisonnier</span>
+        </div>
+      </div>
+      <div class="hero-card-float">
+        <div class="hcf-num">8</div>
+        <div class="hcf-label">ans d'expérience</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-layout">
+    <div class="reveal">
+      <div class="section-label">Prestations</div>
+      <h2 class="section-title">Des services <em>sur mesure</em></h2>
+      <p class="services-intro">Ponctuelle, méticuleuse et discrète — je prends soin de votre intérieur comme s'il était le mien. Pour particuliers et professionnels.</p>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <span class="sc-icon">🧹</span>
+        <div class="sc-name">Ménage d'entretien</div>
+        <div class="sc-desc">Sols, surfaces, salle de bain, toilettes, poussières, vitres</div>
+      </div>
+      <div class="service-card">
+        <span class="sc-icon">📦</span>
+        <div class="sc-name">Grand ménage</div>
+        <div class="sc-desc">Déplacement de meubles, déménagement ou emménagement</div>
+      </div>
+      <div class="service-card">
+        <span class="sc-icon">🏖️</span>
+        <div class="sc-name">Location saisonnière</div>
+        <div class="sc-desc">Ménage complet entre deux locations, linge de lit & toilette</div>
+      </div>
+      <div class="service-card">
+        <span class="sc-icon">🗝️</span>
+        <div class="sc-name">Conciergerie</div>
+        <div class="sc-desc">Gérance complète de votre bien : mise en location, ménage, remise des clés, planification — une autonomie totale pour le propriétaire</div>
+      </div>
+      <div class="service-card">
+        <span class="sc-icon">👕</span>
+        <div class="sc-name">Repassage & linge</div>
+        <div class="sc-desc">Lavage de linge de lit et de toilette, repassage soigné</div>
+      </div>
+      <div class="service-card">
+        <span class="sc-icon">✨</span>
+        <div class="sc-name">Services à la carte</div>
+        <div class="sc-desc">Toute demande spécifique étudiée selon vos besoins</div>
+      </div>
+    </div>
+
+    <div class="concierge-highlight reveal">
+      <div class="concierge-highlight-head">
+        <span class="sc-icon" style="font-size:32px">🗝️</span>
+        <div>
+          <div class="section-label" style="margin-bottom:4px">Zoom conciergerie</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:26px;color:var(--dark)">Une gestion <em style="color:var(--sage-dark);font-style:italic">clé en main</em> de votre bien</h3>
+        </div>
+      </div>
+      <p class="services-intro" style="margin-top:14px">Confiez-moi l'intégralité de la gestion de votre location saisonnière : de la mise en location jusqu'à la remise des clés, je m'occupe de tout pour vous offrir une autonomie complète.</p>
+      <div class="concierge-grid">
+        <div class="concierge-item">
+          <span class="concierge-item-icon">🏠</span>
+          <div>
+            <div class="concierge-item-title">Gérance du bien</div>
+            <div class="concierge-item-desc">Suivi et entretien de votre logement au quotidien</div>
+          </div>
+        </div>
+        <div class="concierge-item">
+          <span class="concierge-item-icon">📢</span>
+          <div>
+            <div class="concierge-item-title">Mise en location</div>
+            <div class="concierge-item-desc">Préparation du logement pour l'accueil des voyageurs</div>
+          </div>
+        </div>
+        <div class="concierge-item">
+          <span class="concierge-item-icon">🧹</span>
+          <div>
+            <div class="concierge-item-title">Ménage entre chaque séjour</div>
+            <div class="concierge-item-desc">Nettoyage complet, linge de lit et de toilette</div>
+          </div>
+        </div>
+        <div class="concierge-item">
+          <span class="concierge-item-icon">🗝️</span>
+          <div>
+            <div class="concierge-item-title">Remise des clés</div>
+            <div class="concierge-item-desc">Check-in / check-out avec état des lieux et inventaire</div>
+          </div>
+        </div>
+        <div class="concierge-item">
+          <span class="concierge-item-icon">📅</span>
+          <div>
+            <div class="concierge-item-title">Planification</div>
+            <div class="concierge-item-desc">Coordination du calendrier de réservations et des passages</div>
+          </div>
+        </div>
+        <div class="concierge-item">
+          <span class="concierge-item-icon">✅</span>
+          <div>
+            <div class="concierge-item-title">Autonomie complète</div>
+            <div class="concierge-item-desc">Vous n'avez rien à gérer, je m'occupe de tout de A à Z</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISPONIBILITÉS -->
+<section class="dispo">
+  <div class="reveal">
+    <div class="section-label">Planning</div>
+    <h2 class="section-title" style="color:var(--white)">Mes <em style="color:var(--sage-light)">disponibilités</em></h2>
+  </div>
+  <div class="dispo-grid reveal">
+    <div class="dispo-day open">
+      <div class="dispo-day-name">Lundi</div>
+      <div class="dispo-hours">08h00<br>20h00</div>
+      <div class="dispo-dot"></div>
+    </div>
+    <div class="dispo-day open">
+      <div class="dispo-day-name">Mardi</div>
+      <div class="dispo-hours">08h00<br>20h00</div>
+      <div class="dispo-dot"></div>
+    </div>
+    <div class="dispo-day open">
+      <div class="dispo-day-name">Mercredi</div>
+      <div class="dispo-hours">08h00<br>20h00</div>
+      <div class="dispo-dot"></div>
+    </div>
+    <div class="dispo-day open">
+      <div class="dispo-day-name">Jeudi</div>
+      <div class="dispo-hours">08h00<br>20h00</div>
+      <div class="dispo-dot"></div>
+    </div>
+    <div class="dispo-day open">
+      <div class="dispo-day-name">Vendredi</div>
+      <div class="dispo-hours">08h00<br>20h00</div>
+      <div class="dispo-dot"></div>
+    </div>
+    <div class="dispo-day open">
+      <div class="dispo-day-name">Samedi</div>
+      <div class="dispo-hours">08h00<br>20h00</div>
+      <div class="dispo-dot"></div>
+    </div>
+    <div class="dispo-day open">
+      <div class="dispo-day-name">Dimanche</div>
+      <div class="dispo-hours">08h00<br>20h00</div>
+      <div class="dispo-dot"></div>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS -->
+<section class="avis" id="avis">
+  <div class="reveal">
+    <div class="section-label">Témoignages</div>
+    <h2 class="section-title">Ce que disent <em>mes clients</em></h2>
+  </div>
+  <div class="avis-layout reveal">
+    <div class="avis-summary">
+      <div class="avis-big">5,0</div>
+      <div class="avis-stars-big">★★★★★</div>
+      <div class="avis-count">Basé sur 3 avis Google vérifiés</div>
+      <div style="margin-top:24px">
+        <div class="avis-bar-row"><span class="avis-bar-label">5</span><div class="avis-bar-track"><div class="avis-bar-fill" style="width:100%"></div></div><span class="avis-bar-pct">100%</span></div>
+        <div class="avis-bar-row"><span class="avis-bar-label">4</span><div class="avis-bar-track"><div class="avis-bar-fill" style="width:0%"></div></div><span class="avis-bar-pct">—</span></div>
+        <div class="avis-bar-row"><span class="avis-bar-label">3</span><div class="avis-bar-track"><div class="avis-bar-fill" style="width:0%"></div></div><span class="avis-bar-pct">—</span></div>
+        <div class="avis-bar-row"><span class="avis-bar-label">2</span><div class="avis-bar-track"><div class="avis-bar-fill" style="width:0%"></div></div><span class="avis-bar-pct">—</span></div>
+        <div class="avis-bar-row"><span class="avis-bar-label">1</span><div class="avis-bar-track"><div class="avis-bar-fill" style="width:0%"></div></div><span class="avis-bar-pct">—</span></div>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--sand-deep)">
+        <a href="https://www.google.com/search?q=Conciergerie+-+Harmonie+Home+Zen+avis" target="_blank" style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--sage-dark);text-decoration:none">Voir tous les avis sur Google →</a>
+      </div>
+    </div>
+
+    <div class="avis-list">
+      <div class="avis-card">
+        <div class="avis-card-top">
+          <div class="avis-author-row">
+            <div class="avis-avatar">Y</div>
+            <div>
+              <div class="avis-name">Yohan Guiu</div>
+              <div class="avis-date">Il y a un mois · Visité en juin</div>
+            </div>
+          </div>
+          <div>
+            <div class="avis-stars">★★★★★</div>
+            <div style="margin-top:6px"><span class="avis-service-tag">Google</span></div>
+          </div>
+        </div>
+        <p class="avis-text">« Ménage parfait, locataire content, rien à dire. »</p>
+      </div>
+
+      <div class="avis-card">
+        <div class="avis-card-top">
+          <div class="avis-author-row">
+            <div class="avis-avatar">J</div>
+            <div>
+              <div class="avis-name">Jade Sciaux</div>
+              <div class="avis-date">Il y a un mois · Visité en juin</div>
+            </div>
+          </div>
+          <div>
+            <div class="avis-stars">★★★★★</div>
+            <div style="margin-top:6px"><span class="avis-service-tag">Google</span></div>
+          </div>
+        </div>
+        <p class="avis-text">« Je suis très satisfaite du travail effectué. C'est une personne très sérieuse, professionnelle et soigneuse. Le ménage est toujours fait avec beaucoup… »</p>
+      </div>
+
+      <div class="avis-card">
+        <div class="avis-card-top">
+          <div class="avis-author-row">
+            <div class="avis-avatar">M</div>
+            <div>
+              <div class="avis-name">Maxime Quaire <span style="font-weight:300;color:var(--muted)">(Max Services)</span></div>
+              <div class="avis-date">Il y a 2 jours · Visité en juillet</div>
+            </div>
+          </div>
+          <div>
+            <div class="avis-stars">★★★★★</div>
+            <div style="margin-top:6px"><span class="avis-service-tag">Google</span></div>
+          </div>
+        </div>
+        <p class="avis-text">« Je recommande vraiment, travail impeccable et très gentille en plus de cela. Nous avons pris le temps de voir ensemble toutes les tâches à faire dans ma maison et elle s'est organisée pou… »</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section class="about">
+  <div class="about-layout">
+    <div class="reveal">
+      <div class="section-label">À propos</div>
+      <h2 class="section-title">8 ans au service <em style="color:var(--sage-light)">de vos espaces</em></h2>
+      <p class="about-text">Bonjour, je suis <strong>Marie Christine</strong>, je vous propose mes services de ménage pour les particuliers et les professionnels. Je peux faire le repassage et les vitres.</p>
+      <p class="about-text" style="margin-top:14px">J'ai également de l'expérience en conciergerie — cela fait <strong>8 ans</strong> que je m'occupe de gérer la remise des clés, du ménage entre deux locations saisonnières, du Check-Out avec inventaire de sortie pour des particuliers qui m'ont confié leur logement saisonnier.</p>
+      <p class="about-text" style="margin-top:14px">Je suis <strong>ponctuelle, sérieuse, méticuleuse et discrète</strong>.</p>
+      <div class="about-certif">
+        <div class="about-certif-icon">🎓</div>
+        <div>
+          <div class="about-certif-label">Certification</div>
+          <div class="about-certif-val">CAP / BEP Hôtellerie-Restauration</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-infos reveal">
+      <div class="about-info-card">
+        <div class="about-info-icon">📅</div>
+        <div>
+          <div class="about-info-label">Membre depuis</div>
+          <div class="about-info-val">Juin 2025 — AlloVoisins</div>
+        </div>
+      </div>
+      <div class="about-info-card">
+        <div class="about-info-icon">🔗</div>
+        <div>
+          <div class="about-info-label">Mises en relation</div>
+          <div class="about-info-val">125 clients contactés</div>
+        </div>
+      </div>
+      <div class="about-info-card">
+        <div class="about-info-icon">⚡</div>
+        <div>
+          <div class="about-info-label">Délai de réponse</div>
+          <div class="about-info-val">Moins d'1 heure</div>
+        </div>
+      </div>
+      <div class="about-info-card">
+        <div class="about-info-icon">✅</div>
+        <div>
+          <div class="about-info-label">Vérifications</div>
+          <div class="about-info-val">Téléphone · Identité · Entreprise</div>
+        </div>
+      </div>
+      <div class="about-info-card">
+        <div class="about-info-icon">🏢</div>
+        <div>
+          <div class="about-info-label">Numéro SIRET</div>
+          <div class="about-info-val">988 291 860 00019</div>
+        </div>
+      </div>
+      <div class="about-info-card">
+        <div class="about-info-icon">📍</div>
+        <div>
+          <div class="about-info-label">Zone d'intervention</div>
+          <div class="about-info-val">Valras-Plage & alentours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-layout">
+    <div class="reveal">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Demandez votre <em>devis gratuit</em></h2>
+      <div class="contact-details">
+        <div class="contact-detail">
+          <div class="cd-icon">📍</div>
+          <div>
+            <div class="cd-label">Localisation</div>
+            <div class="cd-val">Valras-Plage, Hérault (34)</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">⚡</div>
+          <div>
+            <div class="cd-label">Délai de réponse</div>
+            <div class="cd-val">Moins d'1 heure</div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">⭐</div>
+          <div>
+            <div class="cd-label">Note clients</div>
+            <div class="cd-val">5/5 sur <a href="https://www.google.com/search?q=Conciergerie+-+Harmonie+Home+Zen+avis" target="_blank">Google →</a></div>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="cd-icon">🕐</div>
+          <div>
+            <div class="cd-label">Horaires</div>
+            <div class="cd-val">Tous les jours 08h-20h</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="section-label">Réservation</div>
+      <div class="booking-cta">
+        <p class="booking-cta-text">Chaque projet est différent : la surface, la fréquence, le type de bien ou la formule de conciergerie souhaitée influencent directement le tarif. Pour vous proposer un devis juste et adapté, je préfère en discuter directement avec vous.</p>
+        <p class="booking-cta-text">Choisissez simplement un créneau qui vous convient ci-dessous. Lors de notre appel, nous passerons en revue votre demande ensemble et je vous établirai un devis personnalisé.</p>
+        <div class="booking-cta-steps">
+          <div class="booking-cta-step"><span class="booking-cta-num">1</span> Choisissez un créneau</div>
+          <div class="booking-cta-step"><span class="booking-cta-num">2</span> Échangeons par téléphone</div>
+          <div class="booking-cta-step"><span class="booking-cta-num">3</span> Recevez votre devis</div>
+        </div>
+        <button type="button" class="form-submit" id="submit-btn" onclick="handleSubmit(event)">Choisir un créneau →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Harmonie Home Zen</div>
+    <div class="footer-siret" style="margin-top:6px">Marie Christine Soreira · SIRET 988 291 860 00019</div>
+  </div>
+  <div class="footer-copy">Valras-Plage, Hérault (34) · © 2026</div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 100);
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => io.observe(el));
+
+function handleSubmit(e) {
+  e.preventDefault();
+
+  if (typeof Calendly === 'undefined') {
+    alert("Le calendrier est en cours de chargement, réessayez dans un instant.");
+    return;
+  }
+
+  Calendly.initPopupWidget({
+    url: 'https://calendly.com/mariechristine-soreira6/rdv-devis-30min'
+  });
+}
+</script>
+</body>
+</html>
